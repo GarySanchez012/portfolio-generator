@@ -1,51 +1,66 @@
+const fs = require('fs');
+const generatePage = require('./src/page-template');
+
 const profileDataArgs = process.argv.slice(2);
+
 console.log(profileDataArgs);
 
-const animalArray = ["dog", "cat", "pig"];
+const [name, github] = profileDataArgs;
 
-animalArray.push("cow");
+console.log(name, github);
 
-const personObj = {
-  name: "Gary Sanchez",
-  age: 31,
-};
+const pageHTML = generatePage(name, github);
 
-personObj.age = 100;
-personObj.occupation = "Developer";
+fs.writeFile('./index.html', pageHTML, err => {
+  if (err) throw err;
 
+  console.log('Portfolio complete! Check out index.html to see the output!');
+});
 
-//Using function expression syntax
-const addNums = function (numOne, numTwo) {
-    return numOne + numTwo;
-};
+// const animalArray = ["dog", "cat", "pig"];
 
-//using new arrow function syntax
-//if only performing one action, we don't need the curly braces
-const addNum = (numOne, numTwo) => numOne + numTwo;
-const sum = addNum(5, 3); //sum would be 8
+// animalArray.push("cow");
 
-//let is like var and will allow reassignments of values
-let message = "Hello Node!";
-message = "Hello ES6!";
+// const personObj = {
+//   name: "Gary Sanchez",
+//   age: 31,
+// };
 
-let sums = 5 + 3;
-sums += 1;
+// personObj.age = 100;
+// personObj.occupation = "Developer";
 
-//dont need paranthesis around 1 paramater
-const printProfileData = profileDataArr => {
-  //this...
-  for (let i = 0; i < profileDataArr.length; i++) {
-    console.log(profileDataArr[i]);
-  }
+// //Using function expression syntax
+// const addNums = function (numOne, numTwo) {
+//     return numOne + numTwo;
+// };
 
-  console.log("====================");
+// //using new arrow function syntax
+// //if only performing one action, we don't need the curly braces
+// const addNum = (numOne, numTwo) => numOne + numTwo;
+// const sum = addNum(5, 3); //sum would be 8
 
-  //is the same as this..
-  profileDataArr.forEach((profileItem) => {
-    console.log(profileItem);
-    //same as above just cleaner because only 1 action is being done
-    // profileDataArr.forEach(profileItem => console.log(profileItem));
-  });
-};
+// //let is like var and will allow reassignments of values
+// let message = "Hello Node!";
+// message = "Hello ES6!";
 
-printProfileData(profileDataArgs);
+// let sums = 5 + 3;
+// sums += 1;
+
+// //dont need paranthesis around 1 paramater
+// const printProfileData = profileDataArr => {
+//   //this...
+//   for (let i = 0; i < profileDataArr.length; i++) {
+//     console.log(profileDataArr[i]);
+//   }
+
+//   console.log("====================");
+
+//   //is the same as this..
+//   profileDataArr.forEach((profileItem) => {
+//     console.log(profileItem);
+//     //same as above just cleaner because only 1 action is being done
+//     // profileDataArr.forEach(profileItem => console.log(profileItem));
+//   });
+// };
+
+// printProfileData(profileDataArgs);
